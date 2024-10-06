@@ -1,10 +1,6 @@
 from flask import Flask, request, jsonify
 from translate import Translator
 import os
-from dotenv import load_dotenv
-
-# Load environment variables from .env file
-load_dotenv()
 
 app = Flask(__name__)
 translator = Translator(from_lang='en', to_lang='hi')
@@ -28,5 +24,5 @@ def translate_route():
     return jsonify({'translated_text': translated_text})
 
 if __name__ == '__main__':
-    port = os.getenv('FLASK_RUN_PORT', 5000)  # Default to 5000 if not set
+    port = int(os.getenv('PORT', 5000))  # Default to 5000 if not set
     app.run(debug=True, port=port)
